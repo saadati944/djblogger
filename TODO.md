@@ -17,3 +17,4 @@ todo list for `djblogger` project.
 
 - [X] create project
 - [X] create articles app
+- [ ] create models for article and author
