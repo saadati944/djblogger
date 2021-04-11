@@ -16,3 +16,4 @@ todo list for `djblogger` project.
 # DONE
 
 - [X] create project
+- [X] create articles app
