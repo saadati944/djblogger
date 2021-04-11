@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 class Author(models.Model):
     display_name = models.CharField(max_length=100)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.display_name} ({self.user})"
        
 
 class Article(models.Model):
@@ -11,3 +14,6 @@ class Article(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, auto_now=False)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="articles")
     poster = models.ImageField(verbose_name="article_poster")
+
+    def __str__(self):
+        return f"{self.title} @ {self.date_created} by {self.author}"
