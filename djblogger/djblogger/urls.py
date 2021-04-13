@@ -18,11 +18,14 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import url
+from articles.views import login_view, logout_view
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('article/', include('articles.urls')),
+    path('login/', login_view, name="login"),
+    path('logout/', logout_view, name="logout"),
     url('^ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
