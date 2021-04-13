@@ -1,0 +1,17 @@
+{% load static %}
+{% comment %} inputs : form {% endcomment %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>testing ckeditor in django</title>
+    </head>
+    <body>
+        <form action="{% url 'articles:create' %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type='submit' value='save'>
+        </form>
+    </body>
+</html>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>

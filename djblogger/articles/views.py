@@ -19,11 +19,32 @@ def article(request, article_id):
         'title' : art.title,
         'author' : art.author,
         'date_created' : art.date_created,
-        'content' : art.content
+        'content' : art.content,
+        'poster' : art.poster
     })
 
 def create_article(request):
-    pass
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('login'))
+    
+    if(request.method == "POST"):
+        #todo:validating postform data doesn't work !!!
+        form_data = PostForm(request.POST, request.FILES)
+        if(not form_data.is_valid()):
+            pass
+            #todo:check why form data is always invalid !
+        aut = Author.objects.filter(user = request.user).first()
+        art = Article()
+        art.title = form_data.cleaned_data['title']
+        art.content = form_data.cleaned_data['content']
+        art.author = aut
+        art.save()
+        return HttpResponseRedirect(reverse('articles:article', args=(art.id, )))
+
+    return render(request, 'default/addarticle.html', {
+        'form' : PostForm()
+    })
+
 
 def login_view(request):
     if request.method == 'POST':
