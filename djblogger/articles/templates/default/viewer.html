@@ -1,10 +1,11 @@
-{% comment %} inputs : title, author, date_created, content {% endcomment %}
+{% comment %} inputs : title, author, date_created, content, poster {% endcomment %}
 <!DOCTYPE html>
 <html>
     <head>
         <title>testing ckeditor in django</title>
     </head>
     <body>
+		<img src="{{poster}}" >
 		<h1>{{title}}</h1>
 		<p>author : {{author}}</p>
 		<p>creation date : {{date_created}}</p>
