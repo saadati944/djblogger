@@ -6,7 +6,7 @@
         <title>testing ckeditor in django</title>
     </head>
     <body>
-        <form action="{% url 'articles:create' %}" method="post">
+        <form action="{% url 'articles:create' %}" enctype="multipart/form-data" method="post">
         {% csrf_token %}
         {{form}}
         <input type='submit' value='save'>

@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, get_user, login, logout
 from django.contrib.auth.models import User
 from .models import Article, Author
-from .forms import PostForm
+from .forms import ArticleContent
 
 
 def article(request, article_id):
@@ -20,29 +20,35 @@ def article(request, article_id):
         'author' : art.author,
         'date_created' : art.date_created,
         'content' : art.content,
-        'poster' : art.poster
+        'poster' : art.poster.url
     })
 
 def create_article(request):
+    #force user to sign in to be able to create articles
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('login'))
     
+    #create new article with post data, save it and show it.
     if(request.method == "POST"):
-        #todo:validating postform data doesn't work !!!
-        form_data = PostForm(request.POST, request.FILES)
-        if(not form_data.is_valid()):
-            pass
-            #todo:check why form data is always invalid !
-        aut = Author.objects.filter(user = request.user).first()
+        
+        form_content = ArticleContent(request.POST, request.FILES)
+        
+        if not form_content.is_valid():
+            return HttpResponse("invalid post data !!!")
+
         art = Article()
-        art.title = form_data.cleaned_data['title']
-        art.content = form_data.cleaned_data['content']
-        art.author = aut
+        art.title = form_content.cleaned_data['title']
+        art.content = form_content.cleaned_data['content']
+        art.author = Author.objects.get(user = request.user)
+        art.poster = form_content.cleaned_data['poster']
+
         art.save()
+        
         return HttpResponseRedirect(reverse('articles:article', args=(art.id, )))
 
+    #return addarticle.html file if there isn't any post data
     return render(request, 'default/addarticle.html', {
-        'form' : PostForm()
+        'form' : ArticleContent()
     })
 
 
