@@ -3,7 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, get_user, login, logout
 from django.contrib.auth.models import User
-from .models import Article, Author
+from .models import Article
+from users.models import Author
 from .forms import ArticleContent
 
 

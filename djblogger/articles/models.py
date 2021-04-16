@@ -1,14 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
+from users.models import Author
 from ckeditor_uploader.fields import RichTextUploadingField
 
-class Author(models.Model):
-    display_name = models.CharField(max_length=100)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.display_name} ({self.user})"
-       
 
 class Article(models.Model):
     title = models.CharField(max_length=200, blank=False, null=False)
