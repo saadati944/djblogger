@@ -34,7 +34,10 @@ def create_article(request):
         form_content = ArticleContent(request.POST, request.FILES)
         
         if not form_content.is_valid():
-            return HttpResponse("invalid post data !!!")
+            return render(request, 'default/addarticle.html', {
+                'form' : ArticleContent(),
+                'message' : 'invalid information !!'
+            })
 
         art = Article()
         art.title = form_content.cleaned_data['title']
@@ -48,7 +51,8 @@ def create_article(request):
 
     #return addarticle.html file if there isn't any post data
     return render(request, 'default/addarticle.html', {
-        'form' : ArticleContent()
+        'form' : ArticleContent(),
+        'message' : 'enter information then press save'
     })
 
 

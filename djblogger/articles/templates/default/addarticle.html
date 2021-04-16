@@ -1,5 +1,5 @@
 {% load static %}
-{% comment %} inputs : form {% endcomment %}
+{% comment %} inputs : form, message {% endcomment %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,6 +11,8 @@
         {{form}}
         <input type='submit' value='save'>
         </form>
+        <br>
+        {{message}}
     </body>
 </html>
 <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
