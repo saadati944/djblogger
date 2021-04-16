@@ -1,0 +1,26 @@
+{% load static %}
+{% comment %} inputs : articles {% endcomment %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>testing show all articles</title>
+    </head>
+    <body>
+    <table border=1>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Creating date</th>
+        </tr>
+        {% for article in articles %}
+        
+        <tr>
+            <td>{{article.id}}</td>
+            <td><a href="{% url 'articles:article' article.id %}">{{article.title}}</a></td>
+            <td>{{article.date_created}}</td>
+        </tr>
+        
+        {% endfor %}
+    </table>
+    </body>
+</html>
