@@ -24,6 +24,7 @@ from articles.views import login_view, logout_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('article/', include('articles.urls')),
+    path('user/', include('users.urls')),
     path('login/', login_view, name="login"),
     path('logout/', logout_view, name="logout"),
     url('^ckeditor/', include('ckeditor_uploader.urls')),
