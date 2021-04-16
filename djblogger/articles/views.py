@@ -9,7 +9,7 @@ from .forms import ArticleContent
 
 def article(request, article_id):
     art = None
-    art = Article.objects.filter(pk = article_id).first()
+    art = Article.objects.filter(id = article_id).first()
     if art == None :
         # tdoo : 
         return render(request, "default/articlenotfound.html", {

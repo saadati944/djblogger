@@ -4,6 +4,7 @@ todo list for `djblogger` project.
 
 ## todos
 
+- [ ] add viewes for creating new users and viewing user information
 - [ ] migrate to postgresql database
 - [ ] add dockerfile to create docker containers
 - [ ] add a file (`djblogger/environ.py`) to contain environment variables (secret key, theme, ...)
