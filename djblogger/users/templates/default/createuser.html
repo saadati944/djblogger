@@ -1,0 +1,17 @@
+{% load static %}
+{% comment %} inputs : form {% endcomment %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>testing creating new user in django</title>
+    </head>
+    <body>
+        <form action="{% url 'users:create' %}" method="post">
+        {% csrf_token %}
+        {{form.as_ul}}
+        <input type='submit' value='save'>
+        </form>
+        <br>
+        {{message}}
+    </body>
+</html>
