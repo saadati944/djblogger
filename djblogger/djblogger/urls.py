@@ -18,7 +18,7 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import url
-from articles.views import login_view, logout_view
+from users.views import login_view, logout_view
 
 
 urlpatterns = [

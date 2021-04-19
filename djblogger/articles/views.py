@@ -53,29 +53,3 @@ class create_article(View):
         art.save()
 
         return HttpResponseRedirect(reverse('articles:article', args=(art.id, )))
-
-
-
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            # todo : create an index page and redirect to it
-            return HttpResponseRedirect(reverse("articles:create"))
-        else:
-            return render(request, "default/login.html",{
-                'message': "incorrect credentials !!!"
-            })
-
-    return render(request, "default/login.html",{
-        'message':'enter username and password'
-    })
-
-def logout_view(request):
-    logout(request)
-    return render(request, "default/login.html",{
-        'message':'logged out'
-    })

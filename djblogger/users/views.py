@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+from django.contrib.auth import authenticate, get_user, login, logout
+
 from articles.models import Article
 
 from .forms import AuthorUser
@@ -52,4 +54,30 @@ def all_articles(request):
     articles = author.articles.all()
     return render(request, 'default/allarticles.html', {
         'articles' : articles
+    })
+
+
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            # todo : create an index page and redirect to it
+            return HttpResponseRedirect(reverse("articles:create"))
+        else:
+            return render(request, "default/login.html",{
+                'message': "incorrect credentials !!!"
+            })
+
+    return render(request, "default/login.html",{
+        'message':'enter username and password'
+    })
+
+def logout_view(request):
+    logout(request)
+    return render(request, "default/login.html",{
+        'message':'logged out'
     })
